@@ -5,6 +5,18 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/resources"/>
+        <dependent-module archiveName="ism-domain-1.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ism-domain/ism-domain">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="ism-data-1.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ism-data/ism-data">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="ism-drools-1.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ism-drools/ism-drools">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="common-cache-1.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/common-cache/common-cache">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="te-portal"/>
         <property name="java-output-path" value="/te-portal/target/classes"/>
     </wb-module>

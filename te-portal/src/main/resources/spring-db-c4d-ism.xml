@@ -1,0 +1,36 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xmlns:context="http://www.springframework.org/schema/context"
+	 xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+     <bean id="ismDataSource"
+		class="com.mchange.v2.c3p0.ComboPooledDataSource" >
+		<property name="driverClass"><value>${c3p0.jdbc.driverClass.ism}</value></property>
+		<property name="jdbcUrl"><value>${c3p0.jdbc.url.ism}</value> </property>
+		<property name="user" ><value>${c3p0.jdbc.username.ism}</value></property>
+		<property name="password"><value>${c3p0.jdbc.password.ism}</value></property>
+	    <property name="initialPoolSize"><value>${c3p0.jdbc.initialPoolSize.ism}</value></property>
+	    <property name="minPoolSize"><value>${c3p0.jdbc.minPoolSize.ism}</value></property>
+	    <property name="maxPoolSize" ><value>${c3p0.jdbc.maxPoolSize.ism}</value></property>
+	    <property name="maxIdleTime"><value>${c3p0.jdbc.maxIdleTime.ism}</value></property>  
+	    <property name="acquireIncrement"><value>${c3p0.jdbc.acquireIncrement.ism}</value></property>
+        <property name="idleConnectionTestPeriod"><value>${c3p0.jdbc.idleConnectionTestPeriod.ism}</value></property>
+		<!--  <property name="checkoutTimeout" value="30000"></property> -->
+        
+	</bean>
+   
+    <bean id="ismManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="persistenceXmlLocation" value="classpath*:/persistence-c4d-ism.xml" /> 
+        <property name="dataSource" ref="ismDataSource"/>
+         <property name="persistenceUnitName" value="ismUnit"/>
+    </bean>
+     <bean id="ismTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="ismManagerFactory"/>
+        <qualifier value="tx-ismtransactionManager"/> 
+    </bean>
+    
+    <tx:annotation-driven  transaction-manager="ismTransactionManager"/>
+</beans>

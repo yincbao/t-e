@@ -1,0 +1,35 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xmlns:context="http://www.springframework.org/schema/context"
+	 xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+     <bean id="dataSource"
+		class="com.mchange.v2.c3p0.ComboPooledDataSource" >
+		<property name="driverClass"><value>${c3p0.jdbc.driverClass}</value></property>
+		<property name="jdbcUrl"><value>${c3p0.jdbc.url}</value> </property>
+		<property name="user" ><value>${c3p0.jdbc.username}</value></property>
+		<property name="password"><value>${c3p0.jdbc.password}</value></property>
+	    <property name="initialPoolSize"><value>${c3p0.jdbc.initialPoolSize}</value></property>
+	    <property name="minPoolSize"><value>${c3p0.jdbc.minPoolSize}</value></property>
+	    <property name="maxPoolSize" ><value>${c3p0.jdbc.maxPoolSize}</value></property>
+	    <property name="maxIdleTime"><value>${c3p0.jdbc.maxIdleTime}</value></property>  
+	    <property name="acquireIncrement"><value>${c3p0.jdbc.acquireIncrement}</value></property>
+        <property name="idleConnectionTestPeriod"><value>${c3p0.jdbc.idleConnectionTestPeriod}</value></property>
+		<!--  <property name="checkoutTimeout" value="30000"></property> -->
+	</bean>
+   
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="persistenceXmlLocation" value="classpath*:/persistence-krb-agent-data.xml" /> 
+        <property name="dataSource" ref="dataSource"/>
+         <property name="persistenceUnitName" value="persistenceUnit"/>
+    </bean>
+     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+       <qualifier value="tx-transactionManager"/>
+    </bean>
+    
+    <tx:annotation-driven  transaction-manager="transactionManager"/>
+</beans>

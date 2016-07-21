@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<authorities>
+	<in>
+		<resource resource="user detail informations" code="UDIS" operation="4" isRequired="true" />
+		<resource resource="user operation records" code="UBI" operation="7" isRequired="true" />
+	</in>
+	
+	<out>
+		<resource resource="leave work flow" code="http://127.0.0.1:8080/act" operation="7" isRequired="true" />
+		<resource resource="Countersignature" code="http://127.0.0.1:8080/act" operation="7" isRequired="true" />
+	</out>
+</authorities>
