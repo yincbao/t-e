@@ -1,6 +1,6 @@
 package org.baoting.te.exceptions;
 
-import com.hoperun.ism.constaints.ExceptionCodeEnum;
+import org.baoting.te.constaints.ExceptionCodeEnum;
 
 
 /**

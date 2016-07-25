@@ -15,26 +15,26 @@ import java.util.Map;
 public class MongoAnnotationProcessor {
 
 	public static <T> String getDatabase(Class<T> clazz) {
-		com.hoperun.ism.annotation.Mongo schema = annotation(clazz);
+		org.baoting.te.utils.annotation.Mongo schema = annotation(clazz);
 		if (schema != null && !StringUtil.isEmpty(schema.database()))
 			return schema.database();
 		return null;
 	}
 
 	public static <T> String getCollection(Class<T> clazz) {
-		com.hoperun.ism.annotation.Mongo schema = annotation(clazz);
+		org.baoting.te.utils.annotation.Mongo schema = annotation(clazz);
 		if (schema != null && !StringUtil.isEmpty(schema.database()))
 			return schema.collection();
 		return null;
 	}
 
-	private static <T> com.hoperun.ism.annotation.Mongo annotation(Class<T> clazz) {
+	private static <T>org.baoting.te.utils.annotation.Mongo annotation(Class<T> clazz) {
 		if (clazz == null)
 			return null;
-		if (!clazz.isAnnotationPresent(com.hoperun.ism.annotation.Mongo.class))
+		if (!clazz.isAnnotationPresent(org.baoting.te.utils.annotation.Mongo.class))
 			return null;
 		Map<Class<?>, Object> adapterMap = new HashMap<Class<?>, Object>();
-		com.hoperun.ism.annotation.Mongo schema = clazz.getAnnotation(com.hoperun.ism.annotation.Mongo.class);
+		org.baoting.te.utils.annotation.Mongo schema = clazz.getAnnotation(org.baoting.te.utils.annotation.Mongo.class);
 		return schema;
 	}
 }
